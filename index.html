@@ -1,144 +1,111 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GoGoSonicSHOP</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
-    header, footer { background: #f55; color: #fff; padding: 1rem; text-align: center; }
-    nav { display: flex; justify-content: space-between; padding: 1rem; background: #fff; }
-    nav a { text-decoration: none; color: #f55; font-weight: bold; cursor: pointer; }
+    body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
+    header, footer { background: #007bff; color: white; text-align: center; padding: 1rem; }
     .container { padding: 1rem; }
-    .product { background: #fff; padding: 1rem; margin-bottom: 1rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .product h3 { margin: 0 0 0.5rem; }
-    .product p { margin: 0.2rem 0; }
-    .btn { background: #f55; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; }
-    .btn-green { background: green; }
-    input, select { padding: 0.5rem; width: 100%; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 5px; }
-    form { background: #fff; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    section { display: none; }
-    section.active { display: block; }
-    .profile-pic { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; }
+    .product, form { background: white; padding: 1rem; border-radius: 10px; margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    label { display: block; margin-top: 1rem; }
+    input, select, button { width: 100%; padding: 0.5rem; margin-top: 0.3rem; border: 1px solid #ccc; border-radius: 5px; }
+    .btn-green { background: green; color: white; border: none; cursor: pointer; margin-top: 1rem; }
   </style>
-  <script>
-    function showSection(id) {
-      const sections = document.querySelectorAll('section');
-      sections.forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }function showProfile() {
-  document.getElementById('profil-login').style.display = 'none';
-  document.getElementById('profil-detail').style.display = 'block';
-}
-
-function previewFoto(event) {
-  const reader = new FileReader();
-  reader.onload = function() {
-    document.getElementById('preview').src = reader.result;
-  }
-  reader.readAsDataURL(event.target.files[0]);
-}
-
-function kirimPesanan() {
-  const email = document.getElementById('order-email').value;
-  const produk = document.getElementById('produk').value;
-  const qty = document.getElementById('qty').value;
-  const alamat = document.getElementById('alamat').value;
-  const metode = document.getElementById('metode').value;
-
-  const pesan = `Halo Admin, saya ingin pesan:\nProduk: ${produk}\nJumlah: ${qty}\nEmail: ${email}\nAlamat: ${alamat}\nMetode Pembayaran: ${metode}`;
-  const url = `https://wa.me/6283870743757?text=${encodeURIComponent(pesan)}`;
-
-  if (metode.includes("DANA")) {
-    window.open(url, '_blank');
-  } else {
-    alert("Pesanan dikirim. Silakan lanjutkan pembayaran sesuai instruksi.");
-  }
-
-  return false;
-}
-
-window.onload = () => {
-  showSection('produk');
-}
-
-  </script>
 </head>
-<body><header>
-  <h1>GoGoSonicSHOP</h1>
-  <p>Jasa Meningkatkan Engagement Media Sosial</p>
-</header><nav>
-  <a onclick="showSection('produk')">Produk</a>
-  <a onclick="showSection('pesan')">Pesan</a>
-  <a onclick="showSection('profil')">Profil</a>
-</nav><div class="container">  <section id="produk">
-    <h2>Produk Kami</h2>
+<body>
+  <header>
+    <h1>GoGoSonicSHOP</h1>
+    <p>Jasa Sosial Media Cepat & Terpercaya</p>
+  </header>
+
+  <div class="container">
     <div class="product">
-      <h3>Followers Instagram Indonesia (Real Aktif)</h3>
-      <p>Harga: Rp20.000 - 500 Followers</p>
-      <p>Metode: Transfer Dana / GoPay / QRIS</p>
+      <h2>Daftar Produk & Harga</h2>
+      <ul>
+        <li><b>Instagram Followers</b>: Rp45.500 / 1000</li>
+        <li><b>Instagram Likes</b>: Rp1.000 / 1000</li>
+        <li><b>Instagram Views</b>: Rp100 / 1000</li>
+        <li><b>TikTok Followers</b>: Rp25.500 / 1000</li>
+        <li><b>TikTok Views</b>: Rp1.000 / 1000</li>
+      </ul>
     </div>
-    <div class="product">
-      <h3>Like Instagram (Real)</h3>
-      <p>Harga: Rp25.000 - 500 Like</p>
-    </div>
-    <div class="product">
-      <h3>Views Instagram & TikTok</h3>
-      <p>Harga: Rp20.000 - 1.000 Views</p>
-    </div>
-  </section>  <section id="pesan">
-    <h2>Form Pemesanan</h2>
+
     <form onsubmit="return kirimPesanan()">
-      <label>Email:</label>
-      <input type="email" id="order-email" required>
-      <label>Pilih Produk:</label>
-      <select id="produk">
-        <option>Followers Instagram - Rp20.000</option>
-        <option>Like Instagram - Rp25.000</option>
-        <option>Views Instagram & TikTok - Rp20.000</option>
+      <h2>Form Pemesanan</h2>
+
+      <label for="layanan">Pilih Layanan:</label>
+      <select id="layanan" onchange="ubahTargetDanHarga()" required>
+        <option value="">-- Pilih --</option>
+        <option value="ig-followers">Instagram Followers</option>
+        <option value="ig-likes">Instagram Likes</option>
+        <option value="ig-views">Instagram Views</option>
+        <option value="tt-followers">TikTok Followers</option>
+        <option value="tt-views">TikTok Views</option>
       </select>
-      <label>Kuantitas:</label>
-      <input type="number" id="qty" min="1" value="1">
-      <label>Alamat Pengiriman (opsional):</label>
-      <input type="text" id="alamat">
-      <label>Metode Pembayaran:</label>
-      <select id="metode">
-        <option>DANA - 083870743757</option>
-        <option>GoPay - 083870743757</option>
-        <option>QRIS (Scan via WhatsApp)</option>
+
+      <label id="label-target" for="target">Username / Link:</label>
+      <input type="text" id="target" placeholder="Masukkan target" required>
+
+      <label for="jumlah">Jumlah (minimal 10):</label>
+      <input type="number" id="jumlah" min="10" required oninput="hitungHarga()">
+
+      <label for="harga">Total Harga:</label>
+      <input type="text" id="harga" readonly>
+
+      <label for="metode">Metode Pembayaran:</label>
+      <select id="metode" required>
+        <option value="DANA">DANA - 083870743757</option>
+        <option value="GOPAY">GoPay - 083870743757</option>
+        <option value="QRIS">QRIS (Scan via WhatsApp)</option>
       </select>
+
       <button type="submit" class="btn-green">Pesan Sekarang</button>
     </form>
-  </section>  <section id="profil">
-    <h2>Profil Pengguna</h2>
-    <div id="profil-login">
-      <p>Masuk dengan email untuk mengelola pesanan:</p>
-      <form onsubmit="showProfile(); return false;">
-        <label>Email:</label>
-        <input type="email" placeholder="email@example.com" required>
-        <button type="submit" class="btn">Login</button>
-      </form>
-    </div><div id="profil-detail" style="display:none">
-  <h3>Foto Profil</h3>
-  <img id="preview" src="https://via.placeholder.com/100" alt="Foto Profil" class="profile-pic">
-  <input type="file" accept="image/*" onchange="previewFoto(event)">
+  </div>
 
-  <h3>Informasi Akun</h3>
-  <p>📧 Email: Telah login</p>
-  <label>Ubah Kata Sandi:</label>
-  <input type="password" placeholder="Kata sandi baru">
+  <footer>
+    <p>&copy; 2025 GoGoSonicSHOP</p>
+  </footer>
 
-  <h3>Metode Pembayaran</h3>
-  <label>Rekening Dana/GoPay:</label>
-  <input type="text" placeholder="083xxxxxxxxx">
+  <script>
+    function ubahTargetDanHarga() {
+      const jenis = document.getElementById('layanan').value;
+      const label = document.getElementById('label-target');
+      label.innerText = (jenis.includes('likes') || jenis.includes('views')) ? 'Link Video:' : 'Username:';
+      hitungHarga();
+    }
 
-  <button class="btn">Simpan Perubahan</button>
-</div>
+    function hitungHarga() {
+      const jenis = document.getElementById('layanan').value;
+      const jumlah = parseInt(document.getElementById('jumlah').value) || 0;
+      let hargaPer1000 = 0;
 
-  </section>  <section id="hubungi">
-    <h2>Hubungi Admin</h2>
-    <p>Klik tombol di bawah untuk chat admin GoGoSonicSHOP via WhatsApp.</p>
-    <a href="https://wa.me/6283870743757" class="btn-green">Chat Admin</a>
-  </section></div><footer>
-  <p>&copy; 2025 GoGoSonicSHOP. All rights reserved.</p>
-</footer></body>
-</html>
+      switch (jenis) {
+        case 'ig-followers': hargaPer1000 = 45500; break;
+        case 'ig-likes': hargaPer1000 = 1000; break;
+        case 'ig-views': hargaPer1000 = 100; break;
+        case 'tt-followers': hargaPer1000 = 25500; break;
+        case 'tt-views': hargaPer1000 = 1000; break;
+      }
+
+      const total = (jumlah / 1000) * hargaPer1000;
+      document.getElementById('harga').value = 'Rp ' + total.toLocaleString('id-ID');
+    }
+
+    function kirimPesanan() {
+      const layanan = document.getElementById('layanan').value;
+      const target = document.getElementById('target').value;
+      const jumlah = document.getElementById('jumlah').value;
+      const harga = document.getElementById('harga').value;
+      const metode = document.getElementById('metode').value;
+
+      const pesan = `Halo admin, saya ingin order:\nLayanan: ${layanan}\nTarget: ${target}\nJumlah: ${jumlah}\nHarga: ${harga}\nMetode Pembayaran: ${metode}`;
+      const waURL = `https://wa.me/6283870743757?text=${encodeURIComponent(pesan)}`;
+      window.open(waURL, '_blank');
+      return false;
+    }
+  </script>
+</body>
+          </html>
